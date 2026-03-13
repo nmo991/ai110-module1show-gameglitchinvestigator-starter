@@ -6,7 +6,8 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 - What did the game look like the first time you ran it?
 - List at least two concrete bugs you noticed at the start  
-  (for example: "the secret number kept changing" or "the hints were backwards").
+
+  At first, I chose number 10, then the program gave me a hint to go lower, and I chose number 1, then the program told me to go lower although the whole game is guessting between 1 and 100. Another issue I saw was even after guessing 99, the program hints to go higher even though when 100 is not the right answer. All of this happened in Normal mode.
 
 ---
 
