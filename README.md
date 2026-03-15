@@ -39,5 +39,7 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📸 Demo
 
-- [x]<img src="image.png" width="400">
+- [x] Working game screenshot
+
+<img src="image.png">
 
