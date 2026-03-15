@@ -25,6 +25,14 @@ attempt_limit = attempt_limit_map[difficulty]
 
 low, high = get_range_for_difficulty(difficulty)
 
+
+def reset_game_state(low_bound: int, high_bound: int):
+    st.session_state.history = []
+    st.session_state.score = 0
+    st.session_state.status = "playing"
+    st.session_state.attempts = 0
+    st.session_state.secret = random.randint(low_bound, high_bound)
+
 st.sidebar.caption(f"Range: {low} to {high}")
 st.sidebar.caption(f"Attempts allowed: {attempt_limit}")
 
@@ -32,7 +40,7 @@ if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
 
 if "attempts" not in st.session_state:
-    st.session_state.attempts = 1
+    st.session_state.attempts = 0
 
 if "score" not in st.session_state:
     st.session_state.score = 0
@@ -42,6 +50,14 @@ if "status" not in st.session_state:
 
 if "history" not in st.session_state:
     st.session_state.history = []
+
+if "selected_difficulty" not in st.session_state:
+    st.session_state.selected_difficulty = difficulty
+
+if st.session_state.selected_difficulty != difficulty:
+    st.session_state.selected_difficulty = difficulty
+    reset_game_state(low, high)
+    st.success("Difficulty changed. New game started.")
 
 st.subheader("Make a guess")
 
@@ -71,11 +87,7 @@ with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
 if new_game:
-    st.session_state.history = []
-    st.session_state.score = 0
-    st.session_state.status = "playing"
-    st.session_state.attempts = 0
-    st.session_state.secret = random.randint(low, high)
+    reset_game_state(low, high)
     st.success("New game started.")
     st.rerun()
 
@@ -94,6 +106,14 @@ if submit:
     if not ok:
         st.session_state.history.append(raw_guess)
         st.error(err)
+
+        if st.session_state.attempts >= attempt_limit:
+            st.session_state.status = "lost"
+            st.error(
+                f"Out of attempts! "
+                f"The secret was {st.session_state.secret}. "
+                f"Score: {st.session_state.score}"
+            )
     else:
         st.session_state.history.append(guess_int)
 
