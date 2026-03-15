@@ -36,8 +36,5 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📸 Demo
 
-- [x] [Insert a screenshot of your fixed, winning game here]
-   ![alt text](image.png)
-## 🚀 Stretch Features
+![winning game screenshot](image.png)
 
-- [ ] [If you choose to complete Challenge 4, insert a screenshot of your Enhanced Game UI here]
