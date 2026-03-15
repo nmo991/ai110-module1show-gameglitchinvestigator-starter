@@ -26,15 +26,18 @@ It wrote the code, ran away, and now the game is unplayable.
 ## 📝 Document Your Experience
 
 - [x] Describe the game's purpose.
+   
    The purpose of this project is to debug and stabilize an AI-generated Streamlit number guessing game so that gameplay is consistent, hints are trustworthy, and the app logic can be tested outside the UI.
 
 - [x] Detail which bugs you found.
+   
    I found a hint-direction bug where feedback did not consistently match the guess (for example, high guesses could still lead to confusing guidance). I also identified state issues around gameplay flow, especially when difficulty changed mid-game, which required a full reset of attempts, score, status, history, and secret number. In early debugging, input handling suggestions that accepted non-integer guess paths caused errors and needed to be corrected.
 
 - [x] Explain what fixes you applied.
+   
    I refactored core logic into `logic_utils.py` and used `check_guess` to ensure outcomes and messages are aligned (`Too High` -> `Go LOWER`, `Too Low` -> `Go HIGHER`). I added state-reset handling in `app.py` through `reset_game_state(...)` and triggered it when difficulty changes or when starting a new game, so the secret remains stable during a round and resets intentionally between rounds. I kept parsing and scoring centralized with `parse_guess` and `update_score`, then verified behavior with `pytest`, including regression coverage for hint direction.
 
 ## 📸 Demo
 
-![winning game screenshot](image.png)
+- [x]<img src="image.png" width="400">
 
